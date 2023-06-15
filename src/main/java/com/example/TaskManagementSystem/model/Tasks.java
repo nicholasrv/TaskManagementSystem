@@ -1,18 +1,20 @@
 package com.example.TaskManagementSystem.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "Users")
+@Table(name = "Tasks")
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+
 public class Tasks {
 
     @Id
@@ -21,10 +23,11 @@ public class Tasks {
 
     public String title;
     public String description;
+    @JsonFormat(pattern = "yyyy-MM-dd")
     public LocalDate dueDate;
     public String status;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private User user;
 
 }
