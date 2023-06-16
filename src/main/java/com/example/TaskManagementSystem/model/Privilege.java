@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Collection;
 import java.util.List;
 
 @Entity
@@ -20,7 +21,7 @@ public class Privilege {
     private String name;
 
     @ManyToMany(mappedBy = "privileges")
-    private List<Role> roles;
+    private Collection<Role> roles;
 
     public Privilege(String name) {
         this.name = name;

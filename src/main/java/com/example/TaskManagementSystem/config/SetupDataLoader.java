@@ -13,6 +13,7 @@ import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 
 public class SetupDataLoader implements ApplicationListener<ContextRefreshedEvent> {
@@ -39,7 +40,7 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
         Privilege readPrivilege = createPrivilegeIfNotFound("READ_PRIVILEGE");
         Privilege writePrivilege = createPrivilegeIfNotFound("WRITE_PRIVILEGE");
 
-        List<Privilege> adminPrivileges = Arrays.asList(readPrivilege, writePrivilege);
+        Collection<Privilege> adminPrivileges = Arrays.asList(readPrivilege, writePrivilege);
         createRoleIfNotFound("ROLE_ADMIN", adminPrivileges);
         createRoleIfNotFound("ROLE_USER", Arrays.asList(readPrivilege));
 
@@ -67,7 +68,7 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
     }
 
     @Transactional
-    Role createRoleIfNotFound(String name, List<Privilege> privileges){
+    Role createRoleIfNotFound(String name, Collection<Privilege> privileges){
         Role role = roleRepository.findByName(name);
         if(role == null){
             role = new Role(name);

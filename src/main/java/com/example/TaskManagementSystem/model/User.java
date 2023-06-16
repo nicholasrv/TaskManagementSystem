@@ -3,6 +3,7 @@ package com.example.TaskManagementSystem.model;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.Collection;
 import java.util.List;
 
 @Entity
@@ -30,7 +31,7 @@ public class User {
     public boolean tokenExpired;
 
     @OneToMany(cascade=CascadeType.ALL, mappedBy="user")
-    private List<Tasks> tasks;
+    private Collection<Tasks> tasks;
 
     @ManyToMany
     @JoinTable(
@@ -39,7 +40,7 @@ public class User {
                     name = "user_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(
                     name = "role_id", referencedColumnName = "id"))
-    private List<Role> roles;
+    private Collection<Role> roles;
 
 
 

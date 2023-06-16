@@ -9,10 +9,10 @@ public interface TaskManagementSystemService <T>{
 
     public String update (T t);
 
-    public List<T> getAllResults();
+    public List<T> getAllResults() throws SQLException;
 
-    public Optional<T> searchById(Long id);
+    public Optional<T> searchById(Long id) throws SQLException;
 
-    public boolean delete(Long id);
+    public boolean delete(Long id) throws SQLException;
 
 }

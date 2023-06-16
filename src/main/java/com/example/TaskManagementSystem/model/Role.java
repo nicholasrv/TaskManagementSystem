@@ -5,7 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.List;
+import java.util.Collection;
 
 @Entity
 @NoArgsConstructor
@@ -19,7 +19,7 @@ public class Role {
     private String name;
 
     @ManyToMany(mappedBy = "roles")
-    private List<User> users;
+    private Collection<User> users;
 
     @ManyToMany
     @JoinTable(
@@ -28,7 +28,7 @@ public class Role {
                     name = "role_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(
                     name = "privilege_id", referencedColumnName = "id"))
-    private List<Privilege> privileges;
+    private Collection<Privilege> privileges;
 
     public Role(String name) {
         this.name = name;
