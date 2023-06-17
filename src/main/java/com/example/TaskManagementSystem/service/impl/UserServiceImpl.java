@@ -10,11 +10,11 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class UserService implements TaskManagementSystemService<User> {
+public class UserServiceImpl implements TaskManagementSystemService<User> {
 
     private final UserRepository userRepository;
 
-    public UserService(UserRepository userRepository) {
+    public UserServiceImpl(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
@@ -52,5 +52,17 @@ public class UserService implements TaskManagementSystemService<User> {
             return true;
         }
         return false;
+    }
+
+    public User findByEmail(String email) {
+        return userRepository.findByEmail(email);
+    }
+
+    public User findByUsername(String username) {
+        return userRepository.findByUsername(username);
+    }
+
+    public User findByFirstName(String firstName) {
+        return userRepository.findByFirstName(firstName);
     }
 }

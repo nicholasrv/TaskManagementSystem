@@ -5,7 +5,7 @@ import com.example.TaskManagementSystem.model.Role;
 import com.example.TaskManagementSystem.model.User;
 import com.example.TaskManagementSystem.repository.RoleRepository;
 import com.example.TaskManagementSystem.repository.UserRepository;
-import com.example.TaskManagementSystem.service.impl.UserService;
+import com.example.TaskManagementSystem.service.impl.UserServiceImpl;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
@@ -31,7 +31,7 @@ public class MyUserDetailsService implements UserDetailsService {
     @Autowired
     private MessageSource messages;
     @Autowired
-    private UserService service;
+    private UserServiceImpl service;
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
