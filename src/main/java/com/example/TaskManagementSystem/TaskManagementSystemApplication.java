@@ -3,12 +3,15 @@ package com.example.TaskManagementSystem;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.access.hierarchicalroles.RoleHierarchy;
 import org.springframework.security.access.hierarchicalroles.RoleHierarchyImpl;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.access.expression.DefaultWebSecurityExpressionHandler;
+
+import static org.springframework.security.config.Customizer.withDefaults;
 
 @SpringBootApplication
 public class TaskManagementSystemApplication {
@@ -32,13 +35,15 @@ public class TaskManagementSystemApplication {
 	}
 
 	@Bean
-	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-		http.csrf()
-				.disable()
-				.authorizeRequests()
-				.expressionHandler(webSecurityExpressionHandler())
-				.antMatchers(HttpMethod.GET, "/roleHierarchy")
-				.hasRole("STAFF");
+	@Order(1)
+	public SecurityFilterChain apiFilterChain(HttpSecurity http) throws Exception {
+		http
+				.securityMatcher("/api/**")
+				.authorizeHttpRequests(authorize -> authorize
+						.anyRequest().hasRole("ADMIN")
+				)
+				.httpBasic(withDefaults());
+		return http.build();
 	}
 
 }

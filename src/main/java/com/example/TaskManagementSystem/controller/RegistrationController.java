@@ -24,9 +24,22 @@ public class RegistrationController {
         this.roleService = roleService;
     }
 
-    @PostMapping
+    @PostMapping("/api/register")
     public ResponseEntity<String> registerUser(@RequestBody RegistrationDTO registrationDTO) {
         // Validate the registrationDTO and perform necessary checks
+
+        if (registrationDTO.getUsername() == null || registrationDTO.getUsername().isEmpty()) {
+            return ResponseEntity.badRequest().body("Username is required.");
+        }
+
+        if (registrationDTO.getPassword() == null || registrationDTO.getPassword().isEmpty()) {
+            return ResponseEntity.badRequest().body("Password is required.");
+        }
+
+        // Check if the username already exists
+        if (userService.findByUsername(registrationDTO.getUsername()) != null) {
+            return ResponseEntity.badRequest().body("Username already exists.");
+        }
 
         // Create a new User instance
         User user = new User();
