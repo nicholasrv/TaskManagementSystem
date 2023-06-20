@@ -28,6 +28,6 @@ public class Tasks {
     public String status;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    private User user;
+    private UserEntity userEntity;
 
 }

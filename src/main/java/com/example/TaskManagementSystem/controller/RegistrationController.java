@@ -2,8 +2,7 @@ package com.example.TaskManagementSystem.controller;
 
 import com.example.TaskManagementSystem.DTOs.RegistrationDTO;
 import com.example.TaskManagementSystem.model.Role;
-import com.example.TaskManagementSystem.model.User;
-import com.example.TaskManagementSystem.service.RoleService;
+import com.example.TaskManagementSystem.model.UserEntity;
 import com.example.TaskManagementSystem.service.impl.RoleServiceImpl;
 import com.example.TaskManagementSystem.service.impl.UserServiceImpl;
 import org.springframework.http.ResponseEntity;
@@ -42,16 +41,16 @@ public class RegistrationController {
         }
 
         // Create a new User instance
-        User user = new User();
-        user.setUsername(registrationDTO.getUsername());
-        user.setPassword(registrationDTO.getPassword());
+        UserEntity userEntity = new UserEntity();
+        userEntity.setUsername(registrationDTO.getUsername());
+        userEntity.setPassword(registrationDTO.getPassword());
 
         // Set the default role for the user
         Role defaultRole = roleService.findByName("ROLE_USER");
-        user.getRoles().add(defaultRole);
+        userEntity.getRoles().add(defaultRole);
 
         // Save the user
-        userService.save(user);
+        userService.save(userEntity);
 
         return ResponseEntity.ok("User registered successfully!");
     }

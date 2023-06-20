@@ -1,6 +1,6 @@
 package com.example.TaskManagementSystem.service.impl;
 
-import com.example.TaskManagementSystem.model.User;
+import com.example.TaskManagementSystem.model.UserEntity;
 import com.example.TaskManagementSystem.repository.UserRepository;
 import com.example.TaskManagementSystem.service.TaskManagementSystemService;
 import org.springframework.stereotype.Service;
@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class UserServiceImpl implements TaskManagementSystemService<User> {
+public class UserServiceImpl implements TaskManagementSystemService<UserEntity> {
 
     private final UserRepository userRepository;
 
@@ -19,29 +19,29 @@ public class UserServiceImpl implements TaskManagementSystemService<User> {
     }
 
     @Override
-    public User save(User user) {
-        if(user != null){
-            return userRepository.save(user);
+    public UserEntity save(UserEntity userEntity) {
+        if(userEntity != null){
+            return userRepository.save(userEntity);
         }
-        return new User();
+        return new UserEntity();
     }
 
     @Override
-    public String update(User user) {
-        if (user != null && userRepository.findById(user.getId()).isPresent()){
-            userRepository.saveAndFlush(user);
+    public String update(UserEntity userEntity) {
+        if (userEntity != null && userRepository.findById(userEntity.getId()).isPresent()){
+            userRepository.saveAndFlush(userEntity);
             return "The requested user was successfully updated!";
         }
         return "Sorry, but the requested user couldn't be found";
     }
 
     @Override
-    public List<User> getAllResults() throws SQLException {
+    public List<UserEntity> getAllResults() throws SQLException {
         return userRepository.findAll();
     }
 
     @Override
-    public Optional<User> searchById(Long id) throws SQLException {
+    public Optional<UserEntity> searchById(Long id) throws SQLException {
         return userRepository.findById(id);
     }
 
@@ -54,15 +54,15 @@ public class UserServiceImpl implements TaskManagementSystemService<User> {
         return false;
     }
 
-    public User findByEmail(String email) {
+    public UserEntity findByEmail(String email) {
         return userRepository.findByEmail(email);
     }
 
-    public User findByUsername(String username) {
-        return userRepository.findByUsername(username);
+    public UserEntity findByUsername(String username) {
+        return userRepository.findByUsername(username).orElseThrow(null);
     }
 
-    public User findByFirstName(String firstName) {
+    public UserEntity findByFirstName(String firstName) {
         return userRepository.findByFirstName(firstName);
     }
 }

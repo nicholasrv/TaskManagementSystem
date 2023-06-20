@@ -1,10 +1,13 @@
 package com.example.TaskManagementSystem.repository;
 
-import com.example.TaskManagementSystem.model.User;
+import com.example.TaskManagementSystem.model.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface UserRepository extends JpaRepository<User, Long> {
-    public User findByFirstName(String firstName);
-    public User findByEmail(String email);
-    public User findByUsername(String username);
+import java.util.Optional;
+
+public interface UserRepository extends JpaRepository<UserEntity, Long> {
+    public UserEntity findByFirstName(String firstName);
+    public UserEntity findByEmail(String email);
+    public Optional<UserEntity> findByUsername(String username);
+    public Boolean existsByUsername(String username);
 }

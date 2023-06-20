@@ -1,6 +1,5 @@
 package com.example.TaskManagementSystem.DTOs;
 
-import com.example.TaskManagementSystem.repository.PrivilegeRepository;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
