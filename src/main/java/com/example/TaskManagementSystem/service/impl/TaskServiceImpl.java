@@ -53,4 +53,8 @@ public class TaskServiceImpl implements TaskManagementSystemService<Tasks> {
         }
         return false;
     }
+
+    public boolean existsTasksByTitle(String title) {
+        return tasksRepository.existsTasksByTitle(title);
+    }
 }

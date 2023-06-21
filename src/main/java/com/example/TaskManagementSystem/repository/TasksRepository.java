@@ -4,4 +4,5 @@ import com.example.TaskManagementSystem.model.Tasks;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface TasksRepository extends JpaRepository<Tasks, Long> {
+    boolean existsTasksByTitle(String title);
 }
