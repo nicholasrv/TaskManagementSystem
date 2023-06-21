@@ -1,8 +1,8 @@
 package com.example.TaskManagementSystem.model;
 
-import jakarta.persistence.*;
 import lombok.*;
 
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -25,7 +25,7 @@ public class UserEntity {
     public String username;
     public String password;
 
-    @OneToMany(cascade=CascadeType.ALL, mappedBy="user")
+    @OneToMany(cascade=CascadeType.ALL, mappedBy="userEntity")
     private Collection<Tasks> tasks;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)

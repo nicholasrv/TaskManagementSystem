@@ -20,30 +20,4 @@ public class TaskManagementSystemApplication {
 		SpringApplication.run(TaskManagementSystemApplication.class, args);
 	}
 
-	@Bean
-	public RoleHierarchy roleHierarchy() {
-		RoleHierarchyImpl roleHierarchy = new RoleHierarchyImpl();
-		String hierarchy = "ROLE_ADMIN > ROLE_STAFF \n ROLE_STAFF > ROLE_USER";
-		roleHierarchy.setHierarchy(hierarchy);
-		return roleHierarchy;
-	}
-	@Bean
-	public DefaultWebSecurityExpressionHandler webSecurityExpressionHandler() {
-		DefaultWebSecurityExpressionHandler expressionHandler = new DefaultWebSecurityExpressionHandler();
-		expressionHandler.setRoleHierarchy(roleHierarchy());
-		return expressionHandler;
-	}
-
-	@Bean
-	@Order(1)
-	public SecurityFilterChain apiFilterChain(HttpSecurity http) throws Exception {
-		http
-				.securityMatcher("/api/**")
-				.authorizeHttpRequests(authorize -> authorize
-						.anyRequest().hasRole("ADMIN")
-				)
-				.httpBasic(withDefaults());
-		return http.build();
-	}
-
 }

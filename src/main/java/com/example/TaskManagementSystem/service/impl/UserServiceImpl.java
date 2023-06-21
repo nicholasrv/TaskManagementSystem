@@ -54,15 +54,8 @@ public class UserServiceImpl implements TaskManagementSystemService<UserEntity> 
         return false;
     }
 
-    public UserEntity findByEmail(String email) {
-        return userRepository.findByEmail(email);
-    }
-
     public UserEntity findByUsername(String username) {
         return userRepository.findByUsername(username).orElseThrow(null);
     }
 
-    public UserEntity findByFirstName(String firstName) {
-        return userRepository.findByFirstName(firstName);
-    }
 }
